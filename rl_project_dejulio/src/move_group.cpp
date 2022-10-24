@@ -7,6 +7,7 @@ static const std::string PLANNING_GROUP = "kuka_iiwa_arm";
 MOVEIT_CLASS::MOVEIT_CLASS() : _move_group_interface(PLANNING_GROUP) {
 
     //move to default position specified in the moveit wizard (look_down_pose)
+    _move_group_interface.setPoseReferenceFrame("map");
     _move_group_interface.setJointValueTarget(_move_group_interface.getNamedTargetValues("look_down_pose"));
     _move_group_interface.asyncMove(); // a differenza di move(), asyncMove() is not blocking
 
@@ -78,7 +79,7 @@ void MOVEIT_CLASS::ctrl_loop(){
             goal_pose.orientation.y = -1.0;
             goal_pose.orientation.z = 0.0;
 
-            _move_group_interface.setPoseReferenceFrame("map");
+            //_move_group_interface.setPoseReferenceFrame("map");
             _move_group_interface.setPoseTarget(goal_pose);
             _move_group_interface.move();
             _move_group_interface.stop();
