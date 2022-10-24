@@ -144,7 +144,7 @@ void NAVIGATION::ctrl_loop(){
 			}
 		}
 
-		//vai nella stanza del kuka
+		// go into Kuka's room
 		cout << "Reaching kuka" << endl;
 		_last_room = true;
 		while(!navigation( _waypoints[_waypoints.size()-1].x, _waypoints[_waypoints.size()-1].y )){
