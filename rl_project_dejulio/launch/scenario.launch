@@ -1,0 +1,52 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+  <!--<arg name="world"  default="small_office"/> -->  <!-- empty, small_office, ... (see ../worlds) -->
+  <!-- <arg name="robot"  default="full"/> --> <!-- full, lower_body, foot -->       
+  <!--<arg name="gzpose" default="-x 0.0 -y 0.0 -z 0.0 -R 0.0 -P 0.0 -Y 0.0"/>-->
+  <!--<arg name="model" default="$(env TURTLEBOT3_MODEL)" doc="model type [burger, waffle, waffle_pi]"/>-->
+  <!--<arg name="model" default="burger"/>-->
+
+  <!-- Turtlebot initial position-->
+  <arg name="x_pos" default="0.0"/> <!--"-2.0"/> -->
+  <arg name="y_pos" default="0.0"/> <!--"-0.5"/> -->
+  <arg name="z_pos" default="0.0"/>
+  <arg name="yaw_pos" default="1.5707"/>
+  
+  <arg name="gui" default="true"/>
+  <arg name="debug" default="false"/>
+  
+
+  <env name="GAZEBO_MODEL_PATH" value="$(find rl_project_dejulio)/models:$(optenv GAZEBO_MODEL_PATH)" />
+
+  <!-- start up world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <!--<arg name="world_name" value="$(find rl_project_dejulio)/worlds/demo.world"/>-->
+    <arg name="world_name" value="$(find rl_project_dejulio)/worlds/myRoom.world"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>
+  
+
+  <!-- other launch files -->
+  <include file="$(find rl_project_dejulio)/launch/aruco.launch"/>
+  <include file="$(find rl_project_dejulio)/launch/amcl.launch"/>
+  <include file="$(find rl_project_dejulio)/launch/move_base.launch"/>
+  <!--<node name="move_base_client" pkg="rl_project_dejulio" type="movebase_client" output="screen"/> -->
+  
+  
+  <!-- Turtlebot3 burger xacro -->
+  <param name="robot_description" command="$(find xacro)/xacro $(find rl_project_dejulio)/urdf/turtlebot/turtlebot3_burger.urdf.xacro" />
+
+  <!-- Gazebo spawner -->
+  <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-urdf -model turtlebot3_burger -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -Y $(arg yaw_pos) -param robot_description" />
+
+  <!-- nodes needed for rviz -->
+  <node name="joint_state_publisher" pkg="joint_state_publisher" type="joint_state_publisher" />
+  <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
+
+  <!-- spawn rviz -->
+  <!--<node name="rviz" pkg="rviz" type="rviz" args="-d $(find rl_project_dejulio)/rviz/setting.rviz" required="true" />-->
+  
+  
+</launch>

@@ -1,0 +1,14 @@
+material Aruco/marker26_50cm
+{
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture aruco-26_10cm.png
+			}
+		}
+	}
+}
+

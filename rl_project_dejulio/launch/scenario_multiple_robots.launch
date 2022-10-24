@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<launch>
+
+  
+  <arg name="gui" default="true"/>
+  <arg name="debug" default="false"/>
+  
+
+  <env name="GAZEBO_MODEL_PATH" value="$(find rl_project_dejulio)/models:$(optenv GAZEBO_MODEL_PATH)" />
+
+  <!-- start up world -->
+  <include file="$(find gazebo_ros)/launch/empty_world.launch">
+    <!--<arg name="world_name" value="$(find rl_project_dejulio)/worlds/demo.world"/>-->
+    <arg name="world_name" value="$(find rl_project_dejulio)/worlds/myRoom.world"/>
+    <arg name="gui" value="$(arg gui)"/>
+    <arg name="debug" value="$(arg debug)"/>
+  </include>
+  
+
+  <!-- other launch files -->
+  <include file="$(find rl_project_dejulio)/launch/aruco_turtlebot.launch"/>
+  
+  <include file="$(find rl_project_dejulio)/launch/amcl.launch"/>
+  <include file="$(find rl_project_dejulio)/launch/move_base.launch"/>
+  <include file="$(find rl_project_dejulio)/launch/robots.launch"/>
+  
+  <!--<node name="move_base_client" pkg="rl_project_dejulio" type="movebase_client" output="screen"/>-->
+
+  <!-- spawn rviz -->
+  <!--<node name="rviz" pkg="rviz" type="rviz" args="-d $(find rl_project_dejulio)/rviz/setting.rviz" required="true" />-->
+  <!--<node name="rviz" pkg="rviz" type="rviz" args="-d $(find rl_project_dejulio)/rviz/moveit_setup.rviz" required="true" />
+  -->
+</launch>

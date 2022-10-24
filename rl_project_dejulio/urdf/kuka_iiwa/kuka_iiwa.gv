@@ -1,0 +1,35 @@
+digraph G {
+node [shape=box];
+"world" [label="world"];
+"iiwa_link_0" [label="iiwa_link_0"];
+"iiwa_link_1" [label="iiwa_link_1"];
+"iiwa_link_2" [label="iiwa_link_2"];
+"iiwa_link_3" [label="iiwa_link_3"];
+"iiwa_link_4" [label="iiwa_link_4"];
+"iiwa_link_5" [label="iiwa_link_5"];
+"iiwa_link_6" [label="iiwa_link_6"];
+"iiwa_link_7" [label="iiwa_link_7"];
+"iiwa_link_ee" [label="iiwa_link_ee"];
+"camera_link" [label="camera_link"];
+node [shape=ellipse, color=blue, fontcolor=blue];
+"world" -> "world_iiwa_joint" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"world_iiwa_joint" -> "iiwa_link_0"
+"iiwa_link_0" -> "iiwa_joint_1" [label="xyz: 0 0 0.15 \nrpy: 0 -0 0"]
+"iiwa_joint_1" -> "iiwa_link_1"
+"iiwa_link_1" -> "iiwa_joint_2" [label="xyz: 0 0 0.19 \nrpy: 1.5708 -0 3.14159"]
+"iiwa_joint_2" -> "iiwa_link_2"
+"iiwa_link_2" -> "iiwa_joint_3" [label="xyz: 0 0.21 0 \nrpy: 1.5708 -0 3.14159"]
+"iiwa_joint_3" -> "iiwa_link_3"
+"iiwa_link_3" -> "iiwa_joint_4" [label="xyz: 0 0 0.19 \nrpy: 1.5708 -0 0"]
+"iiwa_joint_4" -> "iiwa_link_4"
+"iiwa_link_4" -> "iiwa_joint_5" [label="xyz: 0 0.21 0 \nrpy: 1.5708 1.22465e-16 3.14159"]
+"iiwa_joint_5" -> "iiwa_link_5"
+"iiwa_link_5" -> "iiwa_joint_6" [label="xyz: 0 0.0607 0.19 \nrpy: 1.5708 -0 0"]
+"iiwa_joint_6" -> "iiwa_link_6"
+"iiwa_link_6" -> "iiwa_joint_7" [label="xyz: 0 0.081 0.0607 \nrpy: 1.5708 1.22465e-16 3.14159"]
+"iiwa_joint_7" -> "iiwa_link_7"
+"iiwa_link_7" -> "iiwa_joint_ee" [label="xyz: 0 0 0.045 \nrpy: 0 -0 0"]
+"iiwa_joint_ee" -> "iiwa_link_ee"
+"iiwa_link_ee" -> "camera_joint" [label="xyz: 0 0 0 \nrpy: 0 -0 0"]
+"camera_joint" -> "camera_link"
+}

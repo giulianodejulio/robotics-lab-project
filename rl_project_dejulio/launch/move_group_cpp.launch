@@ -1,0 +1,5 @@
+<launch>
+    <group ns="kuka_iiwa">
+        <node name="move_group_cpp" pkg="rl_project_dejulio" type="move_group_cpp" output="screen"/>
+    </group>
+</launch>

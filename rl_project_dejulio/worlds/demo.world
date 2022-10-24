@@ -1,0 +1,166 @@
+<?xml version="1.0" ?>
+<sdf version="1.4">
+  <world name="default">
+	  <scene>
+	    <shadows>0</shadows>
+    </scene>
+    <physics type="ode">
+      <gravity>0 0 -9.81</gravity>
+      <ode>
+        <solver>
+          <type>quick</type>
+          <iters>20</iters>
+          <sor>1.0</sor>
+        </solver>
+        <constraints>
+          <cfm>0.0</cfm>
+          <erp>0.2</erp>
+          <contact_max_correcting_vel>100.0</contact_max_correcting_vel>
+          <contact_surface_layer>0.0</contact_surface_layer>
+        </constraints>
+      </ode>
+      <real_time_update_rate>1000</real_time_update_rate>
+      <max_step_size>0.001</max_step_size>
+    </physics>
+    <!-- A global light source -->
+    <include>
+      <uri>model://sun</uri>
+    </include>
+    <!-- A ground plane -->
+    <include>
+      <uri>model://ground_plane</uri>
+    </include>
+	
+    <!-- Floor
+    <include>
+      <uri>model://floor</uri>
+			<name>floor</name>
+			<pose>10 0 0 0 0 0 </pose>
+    </include>-->
+
+    <!-- AR Marker (todo: riposizionare i marker opportunamente nella scena e capire come ) 
+    <include>
+      <uri>model://marker26_8cm_massless</uri>
+      <pose>0.5 0 0.17 0 1.5707 0</pose>
+    </include> -->
+
+    
+    <!-- Walls -->
+    
+		<include>
+      <uri>model://w1</uri>
+			<name>w1_bottom</name>
+      <pose>-10 0.0 0.0 0 0.0 -1.57</pose>
+    </include>
+
+		<include>
+      <uri>model://w1</uri>
+			<name>w1_left</name>
+      <pose>10 20 0.0 0 0.0 0.0</pose>
+    </include>
+
+		<include>
+      <uri>model://w1</uri>
+			<name>w1_top</name>
+      <pose>30 0.0 0.0 0 0.0 -1.57</pose>
+    </include>
+
+		<include>
+      <uri>model://w1</uri>
+			<name>w1_right</name>
+      <pose>10 -20 0.0 0 0.0 0.0</pose>
+    </include>
+		
+		<include>
+      <uri>model://w3</uri>
+			<name>w3_no_room_1</name>
+      <pose>-6 12.1 0.0 0 0.0 0.0</pose>
+    </include>
+
+		<include>
+      <uri>model://w3</uri>
+			<name>w3_no_room_2</name>
+      <pose>-1.9 16 0.0 0 0.0 1.57</pose>
+    </include>
+		
+		<include>
+      <uri>model://w2</uri>
+			<name>w3_room_1_1</name>
+      <pose>-1.9 10 0.0 0 0.0 1.57</pose>
+    </include>
+	
+		<include>
+      <uri>model://w2</uri>
+			<name>w3_room_1_2</name>
+      <pose>0.18 8.1 0.0 0 0.0 0.0</pose>
+    </include>
+
+	  <include>
+      <uri>model://w2</uri>
+			<name>w3_room_1_3</name>
+      <pose>6.5 8.1 0.0 0 0.0 0.0</pose>
+    </include>
+		
+		<include>
+      <uri>model://w4</uri>
+			<name>w4_room_1_3</name>
+      <pose>8.1 14 0.0 0 0.0 1.57</pose>
+    </include>
+
+		<include>
+      <uri>model://w2</uri>
+			<name>w4_room_2_1</name>
+      <pose>10.17 8.11 0.0 0 0.0 0.0</pose>
+    </include>
+		
+		<include>
+      <uri>model://w2</uri>
+			<name>w4_room_2_2</name>
+      <pose>14.17 8.11 0.0 0 0.0 0.0</pose>
+    </include>
+		
+		<include>
+      <uri>model://w4</uri>
+			<name>w4_room_2_3</name>
+      <pose>19.4 14 0.0 0 0.0 1.57</pose>
+    </include>
+
+		<include>
+      <uri>model://w2</uri>
+			<name>w4_room_3_1</name>
+      <pose>21.4 8.11 0.0 0 0.0 0.0</pose>
+    </include>
+
+		<include>
+      <uri>model://w2</uri>
+			<name>w4_room_3_2</name>
+      <pose>27.9 8.11 0.0 0 0.0 0.0</pose>
+    </include>
+
+		<include>
+      <uri>model://w4</uri>
+			<name>w4_warehouse_1</name>
+      <pose>7.2 -13.9 0.0 0 0.0 1.57</pose>
+    </include>
+
+		<include>
+      <uri>model://w4</uri>
+			<name>w4_warehouse_2</name>
+      <pose>13.14 -1.0 0.0 0 0.0 0.0</pose>
+    </include>
+
+		<include>
+      <uri>model://w3</uri>
+			<name>w4_warehouse_3</name>
+      <pose>25.9 -1.0 0.0 0 0.0 0.0</pose>
+    </include>
+
+		<include>
+      <uri>model://w2</uri>
+			<name>w4_warehouse_4</name>
+      <pose>7.24 -3.1 0.0 0 0.0 1.57</pose>
+    </include>
+    
+
+  </world>
+</sdf>

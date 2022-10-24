@@ -1,0 +1,14 @@
+material vrc/marker3
+{
+	receive_shadows off
+	technique
+	{
+		pass
+		{
+			texture_unit
+			{
+				texture AR3.png
+			}
+		}
+	}
+}

@@ -1,0 +1,14 @@
+<?xml version="1.0" ?>
+
+<launch>
+  <arg name="odom_topic" default="odom" />
+
+  <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="log">
+    <rosparam file="$(find rl_project_dejulio)/param/costmap_common_params.yaml" command="load" ns="local_costmap"/>
+    <rosparam file="$(find rl_project_dejulio)/param/local_costmap_params.yaml" command="load" />
+    <rosparam file="$(find rl_project_dejulio)/param/global_costmap_params.yaml" command="load" />
+    <rosparam file="$(find rl_project_dejulio)/param/dwa_local_planner_params.yaml" command="load" />
+    <rosparam file="$(find rl_project_dejulio)/param/move_base_params.yaml" command="load" />
+
+  </node>
+</launch>
