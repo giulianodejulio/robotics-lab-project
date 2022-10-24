@@ -46,7 +46,7 @@
       <visual>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://kuka_iiwa_support/meshes/iiwa7/visual/link_0.stl"/>
+          <mesh filename="package://rl_project_dejulio/meshes/kuka_iiwa/iiwa7/visual/link_0.stl"/>
         </geometry>
         <material name="Grey"/>
       </visual>
@@ -54,7 +54,7 @@
       <collision>
         <origin xyz="0 0 0" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://kuka_iiwa_support/meshes/iiwa7/collision/link_0.stl"/>
+          <mesh filename="package://rl_project_dejulio/meshes/kuka_iiwa/iiwa7/collision/link_0.stl"/>
         </geometry>
         <material name="Grey"/>
       </collision>
@@ -157,7 +157,7 @@
       <visual>
         <origin xyz="0 0 -0.026" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://kuka_iiwa_support/meshes/iiwa7/visual/link_3.stl"/>
+          <mesh filename="package://rl_project_dejulio/meshes/kuka_iiwa/iiwa7/visual/link_3.stl"/>
         </geometry>
         <material name="Orange"/>
       </visual>
@@ -165,7 +165,7 @@
       <collision>
         <origin xyz="0 0 -0.026" rpy="0 0 0"/>
         <geometry>
-          <mesh filename="package://kuka_iiwa_support/meshes/iiwa7/collision/link_3.stl"/>
+          <mesh filename="package://rl_project_dejulio/meshes/kuka_iiwa/iiwa7/collision/link_3.stl"/>
         </geometry>
         <material name="Orange"/>
       </collision>

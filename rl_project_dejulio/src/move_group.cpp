@@ -16,7 +16,7 @@ MOVEIT_CLASS::MOVEIT_CLASS() : _move_group_interface(PLANNING_GROUP) {
     _enable_motion = false;
     _stop_motion = false;
     _exit_from_loop = false;
-    
+    _task_completed = false;
 }
 
 
@@ -55,7 +55,7 @@ void MOVEIT_CLASS::diff_drive_cb(std_msgs::Int32 req_marker){ //ci entra
 void MOVEIT_CLASS::ctrl_loop(){
 
     ros::Rate rate(10);
-    while(ros::ok()){
+    while(ros::ok() && !_task_completed){
         if(_enable_motion && !_stop_motion){
             
             //ruota il giunto 3. Mentre ruota, fermati se trovi il marker
@@ -92,6 +92,8 @@ void MOVEIT_CLASS::ctrl_loop(){
             _move_group_interface.setPoseReferenceFrame("map");
             _move_group_interface.setPoseTarget(goal_pose);
             _move_group_interface.move();
+            _move_group_interface.stop();
+            _task_completed = true;
             //cout<<"ciao1"<<endl;
             /*
             std::vector<geometry_msgs::Pose> waypoints;

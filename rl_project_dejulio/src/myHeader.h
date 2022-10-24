@@ -103,6 +103,7 @@ class MOVEIT_CLASS{
         bool _enable_motion;
         bool _stop_motion;
         bool _exit_from_loop;
+        bool _task_completed;
 
         moveit::planning_interface::MoveGroupInterface _move_group_interface;
         const moveit::core::JointModelGroup* _joint_model_group;
