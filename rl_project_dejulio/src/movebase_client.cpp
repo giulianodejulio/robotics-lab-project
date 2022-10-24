@@ -1,6 +1,5 @@
 #include "myHeader.h"
 
-//#define robot_namespace "/turtlebot"
 
 NAVIGATION::NAVIGATION() : _ac("/move_base", true){
 	_cmd_vel_pub = _nh.advertise<geometry_msgs::Twist>("/cmd_vel",1);
@@ -20,8 +19,6 @@ NAVIGATION::NAVIGATION() : _ac("/move_base", true){
 
 void NAVIGATION::aruco_cb(const aruco_msgs::MarkerArrayConstPtr &marker){
 	_marker_id = marker->markers[0].id;
-	//cout << "Marker Id:" << _marker_id<<endl;
-	//ROS_INFO("id marker: %d", _marker_id);
 	if(_marker_id == _requested_marker){
 		_marker_match = true;
 	}
@@ -37,22 +34,20 @@ void NAVIGATION::odom_cb(const nav_msgs::OdometryConstPtr &odom){
     double roll, pitch;
     tf::Matrix3x3(q).getRPY(roll, pitch, _curr_yaw);
 
-    //testing the callback
-	//cout << "Current yaw from odom_cb: " << _curr_yaw << endl << endl;
 }
 
 
 void NAVIGATION::human_input(){
 	string keyboard_input;
 	cout << "Choose the tool:" << endl;
-	cout<<"[1] for hammer" << endl << "[2] for drill" << endl << "[3] for screwdriver"<<endl;
+	cout<<"[1] for hammer" << endl << "[2] for drill" << endl << "[3] for screwdriver" << endl;
 	getline(cin, keyboard_input);
 	
-	if( keyboard_input == "1") //2 stanza
+	if( keyboard_input == "1") //2 room
 		_requested_marker = 25;
-	else if( keyboard_input == "2") //1 stanza
+	else if( keyboard_input == "2") //1 room
 		_requested_marker = 26;
-	else if( keyboard_input == "3") //3 stanza
+	else if( keyboard_input == "3") //3 room
 		_requested_marker = 24;
 	
 }
@@ -82,7 +77,6 @@ bool NAVIGATION::navigation(float x_goal, float y_goal){
 			cout << "Room reached" <<endl;
 			return done;
 		}
-		//cout << "_curr_yaw: "<< _curr_yaw << endl;
 		r.sleep();
 	}
 	return false;
@@ -110,12 +104,12 @@ void NAVIGATION::ctrl_loop(){
 	_wp_index = 0;
 
 	human_input();
-	//while(!_task_completed && ros::ok()){
 		while(!_marker_match && _wp_index <= _waypoints.size()-2 ) {
 			while(!navigation(_waypoints[_wp_index].x, _waypoints[_wp_index].y)){
 				rate.sleep();
 			}
-			if(!_marker_match){ //se non hai trovato il marker appena arrivato nella stanza, ruota
+
+			if(!_marker_match){ //if marker was not found right away, rotate on the spot
 				cout<<"Tool not found. Rotating on the spot..." << endl;
 				cumulative_yaw = 0;
 				previous_curr_yaw = _curr_yaw;	
@@ -125,37 +119,33 @@ void NAVIGATION::ctrl_loop(){
 
 				while( !_marker_match && fabs(cumulative_yaw) < 2*M_PI ){
 					cumulative_yaw = cumulative_yaw + fabs( fabs(_curr_yaw) - fabs(previous_curr_yaw) );
-					//cout<<"cumulative yaw: "<<cumulative_yaw<<endl;
-					//cout<<"curr yaw: "<<_curr_yaw<<endl;
-					//cout<<"previous curr yaw: "<<previous_curr_yaw<<endl<<endl;
 					previous_curr_yaw = _curr_yaw;
-					
 					rate.sleep();
 				}
 
 				cmd.angular.z = 0.0;
 				_cmd_vel_pub.publish(cmd);
 
-				if(!_marker_match){ //se non l'hai trovato neanche ruotando, cambia stanza
+				if(!_marker_match){ //if marker was not found after the rotation, move to the next room
 					cout << "Tool not found. Trying in another room..." << endl;
 					_wp_index++;
 				}
-				else { //l'hai trovato ruotando
+				else { //marker was found while rotating
 					cout << "Tool found while rotating. Sleeping for 1 second..." << endl;
 					ros::Duration(1).sleep();
-					cout << "Awake" <<endl;
+					cout << "Awake" << endl;
 				}
 			}
 
 			else { //ho trovato il marker
-				cout <<"Tool found. Sleeping for 1 second..."<<endl;
+				cout <<"Tool found. Sleeping for 1 second..." << endl;
 				ros::Duration(1).sleep();
-				cout << "Awake" <<endl;
+				cout << "Awake" << endl;
 			}
 		}
 
 		//vai nella stanza del kuka
-		cout << "Reaching kuka"<<endl;
+		cout << "Reaching kuka" << endl;
 		_last_room = true;
 		while(!navigation( _waypoints[_waypoints.size()-1].x, _waypoints[_waypoints.size()-1].y )){
 			rate.sleep();
@@ -163,18 +153,15 @@ void NAVIGATION::ctrl_loop(){
 		_task_completed = true;
 		cout <<"Task completed." << endl;
 
-	//}
 	
 }
 
 
 void NAVIGATION::diff_drive_loop(){
 	ros::Rate rate(10);
-	//std_msgs::Bool flag_true, flag_false;
 	std_msgs::Int32 marker, uncompleted;
 	uncompleted.data = -1;
-	//flag_true.data = true;
-	//flag_false.data = false;
+
 	while(ros::ok()){
 		if(_task_completed){
 			marker.data = _requested_marker;
@@ -183,7 +170,6 @@ void NAVIGATION::diff_drive_loop(){
 		else{
 			_diff_drive_pub.publish(uncompleted);
 		}
-		//cout<<"requested marker in diff drive loop: "<<_requested_marker<<endl;
 		rate.sleep();
 	}
 

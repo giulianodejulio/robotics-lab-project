@@ -34,10 +34,10 @@
 using namespace std;
 
 
-class NAVIGATION {
+class NAVIGATION{
     public:
         NAVIGATION();
-        void run(); //used to start all the parallel functions of my system, including callbacks
+        void run();
         
         void aruco_cb(const aruco_msgs::MarkerArrayConstPtr &marker);
         void odom_cb(const nav_msgs::OdometryConstPtr &odom);
@@ -48,12 +48,8 @@ class NAVIGATION {
         //Threads
         void ctrl_loop();
         void diff_drive_loop();      
-        
-        //int getMarkerId(){return this->_marker_id;}
-        //int getRequestedMarker(){return this->_requested_marker;}
 
     private:
-        
         ros::NodeHandle _nh;
         
         geometry_msgs::Point _curr_pos;
@@ -86,14 +82,11 @@ class MOVEIT_CLASS{
         void run();
 
         void aruco_cb(const aruco_msgs::MarkerArrayConstPtr &marker);
-        void diff_drive_cb(std_msgs::Int32 req_marker); //usata per ricevere un intero che è il marker richiesto dall'utente
-
+        void diff_drive_cb(std_msgs::Int32 req_marker); //used to receive the integer which is the marker requested by the user
 
         void ctrl_loop();
 
-
     private:
-
         ros::NodeHandle _nh;
 
         int _marker_id;

@@ -3,44 +3,13 @@
   <!-- Turtlebot initial pose -->
   <arg name="x_pos" default="0.0"/> <!-- -3.5 -->
   <arg name="y_pos" default="0.0"/> <!-- 2.5 -->
-  <arg name="z_pos" default="0.0"/> <!-- se metto un offset è perchè il pavimento ha uno spessore non nullo-->
+  <arg name="z_pos" default="0.0"/>
   <arg name="yaw_pos" default="1.5707"/> <!-- 3.1415 -->
+  
   <!-- Kuka iiwa initial pose -->
   <arg name="kuka_x_pos" default="2.0"/> 
   <arg name="kuka_y_pos" default="4.5"/> 
-  <arg name="kuka_z_pos" default="0.0"/> <!-- se metto un offset è perchè il pavimento ha uno spessore non nullo-->
-
-
-  <!-- No namespace here as we will share this description.
-  Access with slash at the beginning -->
-  
-  <!-- TURTLEBOT3 BURGER -->
-  <!--<group ns="turtlebot">
-    <param name="tf_prefix" value="turtlebot" />
-    <param name="robot_description" command="$(find xacro)/xacro $(find rl_project_dejulio)/urdf/turtlebot/turtlebot3_burger.urdf.xacro" />
-    <node name="urdf_spawner" pkg="gazebo_ros" type="spawn_model" args="-urdf -model turtlebot3_burger -x $(arg x_pos) -y $(arg y_pos) -z $(arg z_pos) -Y $(arg yaw_pos) -param robot_description"/>
-    <node name="robot_state_publisher" pkg="robot_state_publisher" type="robot_state_publisher" />
-    
-    <node pkg="move_base" type="move_base" respawn="false" name="move_base" output="screen">
-      <param name="base_local_planner" value="dwa_local_planner/DWAPlannerROS" />
-      <rosparam file="$(find rl_project_dejulio)/param/costmap_common_params.yaml" command="load" ns="local_costmap" />
-      <rosparam file="$(find rl_project_dejulio)/param/local_costmap_params.yaml" command="load" />
-      <rosparam file="$(find rl_project_dejulio)/param/global_costmap_params.yaml" command="load" />
-      <rosparam file="$(find rl_project_dejulio)/param/move_base_params.yaml" command="load" />
-      <rosparam file="$(find rl_project_dejulio)/param/dwa_local_planner_params.yaml" command="load" />      
-      <remap from="map" to="/map" />
-
-       li commento tanto non vengono caricati in ogni caso
-      <param name="controller_frequency" value="10.0" />
-      <param name="/move_base/global_costmap/robot_base_frame" value="turtlebot/base_link"/>
-      <param name="/move_base/local_costmap/robot_base_frame" value="turtlebot/base_link"/>
-      <param name="/move_base/local_costmap/global_frame" value="turtlebot/odom"/>
-      <param name="/move_base/global_costmap/obstacle_layer/scan/topic" value="turtlebot/scan"/>
-      
-      <remap from="map" to="/map" />
-    </node>
-
-  </group> -->
+  <arg name="kuka_z_pos" default="0.0"/>
 
   <!-- TURTLEBOT3 BURGER -->
   
@@ -70,7 +39,5 @@
 
   </group>
   
-  
-  <!-- il nodo move_group_cpp l'ho messo anche in un launch a parte, move_group_cpp.launch, per avere un terminale più pulito-->
   
 </launch>
