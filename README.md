@@ -1,5 +1,5 @@
-# rl_main
-This is the repository for the Technical Project of Robotics Lab exam by Giuliano de Julio.
+# robotics-lab-project
+This is the repository for my Technical Project for Robotics Lab exam.
 
 To run the packages, type in a terminal `roslaunch rl_project_dejulio scenario_multiple_robots.launch`, which will spawn the Gazebo scene and run the node commanding the Kuka manipulator.
 
